@@ -1,0 +1,88 @@
+﻿@page
+@model Szasz_Botond_AirlineWeb.Pages.Reservations.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Reservation</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Reservation.ID" />
+            <div class="form-group">
+                <label asp-for="Reservation.first_name" class="control-label"></label>
+                <input asp-for="Reservation.first_name" class="form-control" />
+                <span asp-validation-for="Reservation.first_name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reservation.last_name" class="control-label"></label>
+                <input asp-for="Reservation.last_name" class="form-control" />
+                <span asp-validation-for="Reservation.last_name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reservation.nationality" class="control-label"></label>
+                <input asp-for="Reservation.nationality" class="form-control" />
+                <span asp-validation-for="Reservation.nationality" class="text-danger"></span>
+            </div>
+            <label asp-for="Reservation.DestinationID" class="control-label">Destination Name</label>
+            <select asp-for="Reservation.DestinationID" class="form-control" asp-items="ViewBag.DestinationID">
+            </select>
+            <span asp-validation-for="Reservation.DestinationID" class="text-danger"></span>
+            <div class="form-group">
+                <label asp-for="Reservation.DepartureDate" class="control-label"></label>
+                <input asp-for="Reservation.DepartureDate" class="form-control" />
+                <span asp-validation-for="Reservation.DepartureDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reservation.ArrivalDate" class="control-label"></label>
+                <input asp-for="Reservation.ArrivalDate" class="form-control" />
+                <span asp-validation-for="Reservation.ArrivalDate" class="text-danger"></span>
+            </div>
+            <label asp-for="Reservation.AirlineID" class="control-label">Airline Name</label>
+            <select asp-for="Reservation.AirlineID" class="form-control" asp-items="ViewBag.AirlineID">
+            </select>
+            <span asp-validation-for="Reservation.AirlineID" class="text-danger"></span>
+            <div class="form-group">
+                <div class="table">
+                    <table>
+                        <tr>
+                            @{
+                                int cnt = 0;
+                                foreach (var cat in Model.AssignedCategoryDataList)
+                                {
+                                    if (cnt++ % 3 == 0)
+                                    {
+                                    @:</tr><tr>
+                                    }
+                                    @:<td>
+                                        <input type="checkbox"
+                                               name="selectedCategories"
+                                               value="@cat.CategoryID"
+                                               @(Html.Raw(cat.Assigned ? "checked=\"checked\"" : "")) />
+                                        @cat.CategoryID @: @cat.Name
+                                    @:</td>
+                                }
+                            @:</tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

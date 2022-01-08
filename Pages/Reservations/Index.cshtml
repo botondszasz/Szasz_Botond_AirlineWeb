@@ -1,0 +1,89 @@
+﻿@page "/{id:int?}"
+@model Szasz_Botond_AirlineWeb.Pages.Reservations.IndexModel
+
+@{
+    ViewData["Title"] = "Reservations";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Reservation[0].first_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reservation[0].last_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reservation[0].nationality)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reservation[0].Destination.DestinationName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reservation[0].DepartureDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reservation[0].ArrivalDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reservation[0].Airline.AirlineName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reservation[0].ReservationCategories)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ReservationD.Reservations)
+        {
+            string selectedRow = "";
+            if (item.ID == Model.ReservationID)
+            {
+                selectedRow = "table-success";
+            }
+        <tr class="@selectedRow">
+            <td>
+                @Html.DisplayFor(modelItem => item.first_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.last_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nationality)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Destination.DestinationName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartureDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArrivalDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Airline.AirlineName)
+            </td>
+            <td>
+                @{
+                    foreach (var category in item.ReservationCategories)
+                    {
+                        @category.Category.ID @: @category.Category.CategoryName <br />
+                    }
+                }
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

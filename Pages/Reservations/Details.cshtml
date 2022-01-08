@@ -1,0 +1,49 @@
+﻿@page
+@model Szasz_Botond_AirlineWeb.Pages.Reservations.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Reservation</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Reservation.first_name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Reservation.first_name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Reservation.last_name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Reservation.last_name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Reservation.nationality)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Reservation.nationality)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Reservation.DepartureDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Reservation.DepartureDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Reservation.ArrivalDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Reservation.ArrivalDate)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Reservation.ID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
